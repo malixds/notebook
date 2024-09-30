@@ -15,6 +15,7 @@ class UserController extends Controller
         $contacts = auth()->user()->contacts()->get();
         return view('page.contacts', [
             'contacts' => $contacts,
+            'user' => auth()->user()
         ]);
     }
 }

@@ -11,13 +11,16 @@ class ContactController extends Controller
     public function contact(Contact $contact)
     {
         return view('page.contact', [
-            'contact' => $contact
+            'contact' => $contact,
+            'user' => auth()->user()
         ]);
     }
 
     public function contactFormShow()
     {
-        return view('page.contactform');
+        return view('page.contactform', [
+            'user' => auth()->user()
+        ]);
     }
 
     public function contactFormCreate(Request $request)
@@ -31,7 +34,8 @@ class ContactController extends Controller
         $contact = Contact::query()->create($data);
         return redirect()->route('contact',
             [
-                'contact' => $contact
+                'contact' => $contact,
+                'user' => auth()->user()
             ]);
     }
 }
