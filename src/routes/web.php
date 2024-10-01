@@ -31,7 +31,20 @@ Route::middleware('auth')->group(function () {
     })->name('search');
     Route::get('/contacts', [UserController::class, 'contacts'])->name('contacts');
     Route::get('/contacts/{contact}', [ContactController::class, 'contact'])->name('contact');
+
+
+    Route::post('/contact/delete{contact}', [ContactController::class, 'contactDelete'])->name('contact-delete');
+
+
+    Route::post('/contact/edit/{contact}', [ContactController::class, 'contactEdit'])->name('contact-edit');
+    Route::get('/contact/{contact}', [ContactController::class, 'contactEditShow'])->name('contact-edit-show');
+
+
+
+
+
     Route::get('/contact/form', [ContactController::class, 'contactFormShow'])->name('contact-form-show');
+
     Route::post('/contact/form', [ContactController::class, 'contactFormCreate'])->name('contact-form-create');
     Route::get('/logout', function () {
         Auth::logout();

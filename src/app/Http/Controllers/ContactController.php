@@ -38,4 +38,30 @@ class ContactController extends Controller
                 'user' => auth()->user()
             ]);
     }
+
+    public function contactDelete(Contact $contact)
+    {
+        $contact->find($contact->id)->delete();
+        return redirect()->route('contacts');
+    }
+
+    public function contactEditShow(Contact $contact)
+    {
+        return view('page.contacteditshow', [
+            'contact' => $contact,
+            'user' => auth()->user()
+        ]);
+
+    }
+    public function contactEdit(Request $request, Contact $contact)
+    {
+        $data = [
+            "name"      => $request->get('name'),
+            "phone"     => $request->get('phone'),
+            "story"     => $request->get('story'),
+        ];
+        $contact->find($contact->id)->update($data);
+        return redirect()->route('contact', [
+            'contact' => $contact]);
+    }
 }
